@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Flask App</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+    }
+  </script>
+
+</head>
+
+
+<body class="bg-gray-100 min-h-screen flex items-center justify-center">
+
+  <div class="w-full max-w-lg bg-white shadow-md rounded-lg p-6">
+    <div class="flex justify-between items-center">
+      <h1 class="text-2xl font-bold text-gray-800 dark:text-white animate-fadeIn">Flask App</h1>
+      <button onclick="toggleDarkMode()" class="px-4 py-2 bg-gray-800 text-white rounded hover:bg-gray-700">
+        🌙 Toggle Dark Mode
+      </button>
+    </div>
+
+    <!-- Flash Messages -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+    {% for category, message in messages %}
+    <div class="mt-4 p-3 rounded text-white 
+                      {% if category == 'success' %} bg-green-500 {% else %} bg-red-500 {% endif %}">
+      {{ message }}
+    </div>
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
+
+    <form action="/submit" method="POST" class="mt-6">
+      <div class="flex">
+        <input type="text" name="name" placeholder="Enter your name"
+          class="flex-grow border border-gray-300 rounded-l px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400">
+        <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-r hover:bg-blue-600">
+          Submit
+        </button>
+      </div>
+    </form>
+
+    <h2 class="text-xl font-semibold mt-6">Registered Users:</h2>
+    <ul class="mt-4">
+      {% for user in users %}
+      <li class="flex justify-between items-center bg-gray-100 p-3 rounded mb-2">
+        <span class="text-gray-700">{{ user.name }}</span>
+        <a href="{{ url_for('delete', id=user.id) }}" class="text-red-500 hover:underline">Delete</a>
+      </li>
+      {% endfor %}
+    </ul>
+
+    <a href="{{ url_for('about') }}"
+      class="mt-4 inline-block bg-gray-600 text-white px-4 py-2 rounded hover:bg-gray-700">
+      About
+    </a>
+  </div>
+
+  <script>
+    function toggleDarkMode() {
+      document.documentElement.classList.toggle('dark');
+      localStorage.setItem('darkMode', document.documentElement.classList.contains('dark'));
+    }
+
+    if (localStorage.getItem('darkMode') === 'true') {
+      document.documentElement.classList.add('dark');
+    }
+  </script>
+
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          animation: {
+            fadeIn: "fadeIn 1s ease-in-out",
+          },
+          keyframes: {
+            fadeIn: {
+              "0%": { opacity: 0 },
+              "100%": { opacity: 1 },
+            },
+          },
+        },
+      },
+    }
+  </script>
+
+
+</body>
+
+
+</html>

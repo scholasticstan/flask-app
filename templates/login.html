@@ -1,0 +1,15 @@
+<body class="flex items-center justify-center min-h-screen bg-gray-100 dark:bg-gray-900">
+  <div class="bg-white dark:bg-gray-800 p-6 rounded shadow-lg w-96">
+    <h2 class="text-2xl font-bold text-gray-900 dark:text-white">Login</h2>
+    <form action="/login" method="POST" class="mt-4">
+      <input type="text" name="username" placeholder="Username"
+        class="w-full p-2 border rounded dark:bg-gray-700 dark:text-white">
+      <input type="password" name="password" placeholder="Password"
+        class="w-full p-2 border rounded mt-2 dark:bg-gray-700 dark:text-white">
+      <button type="submit" class="w-full bg-blue-500 text-white py-2 mt-4 rounded">
+        Login
+      </button>
+    </form>
+    <a href="/register" class="block mt-3 text-blue-500">Don't have an account? Register</a>
+  </div>
+</body>
