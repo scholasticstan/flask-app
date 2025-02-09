@@ -57,6 +57,10 @@
       {% endfor %}
     </ul>
 
+    <img src="{{ url_for('static', filename='uploads/' + current_user.profile_pic) }}"
+      class="w-16 h-16 rounded-full border-2 border-gray-300">
+
+
     <a href="{{ url_for('about') }}"
       class="mt-4 inline-block bg-gray-600 text-white px-4 py-2 rounded hover:bg-gray-700">
       About
